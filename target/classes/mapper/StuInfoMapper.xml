@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crud.dao.StuInfoMapper">
+  <resultMap id="BaseResultMap" type="com.crud.bean.StuInfo">
+    <id column="info_Id" jdbcType="INTEGER" property="infoId" />
+    <result column="info_Name" jdbcType="VARCHAR" property="infoName" />
+    <result column="info_Sex" jdbcType="VARCHAR" property="infoSex" />
+    <result column="info_Tel" jdbcType="VARCHAR" property="infoTel" />
+    <result column="info_Email" jdbcType="VARCHAR" property="infoEmail" />
+    <result column="info_Qq" jdbcType="VARCHAR" property="infoQq" />
+    <result column="info_Wechat" jdbcType="VARCHAR" property="infoWechat" />
+    <result column="info_Note" jdbcType="VARCHAR" property="infoNote" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    info_Id, info_Name, info_Sex, info_Tel, info_Email, info_Qq, info_Wechat, info_Note
+  </sql>
+  <select id="selectByExample" parameterType="com.crud.bean.StuInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tab_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tab_info
+    where info_Id = #{infoId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tab_info
+    where info_Id = #{infoId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.crud.bean.StuInfoExample">
+    delete from tab_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.crud.bean.StuInfo">
+    insert into tab_info (info_Id, info_Name, info_Sex, 
+      info_Tel, info_Email, info_Qq, 
+      info_Wechat, info_Note)
+    values (#{infoId,jdbcType=INTEGER}, #{infoName,jdbcType=VARCHAR}, #{infoSex,jdbcType=VARCHAR}, 
+      #{infoTel,jdbcType=VARCHAR}, #{infoEmail,jdbcType=VARCHAR}, #{infoQq,jdbcType=VARCHAR}, 
+      #{infoWechat,jdbcType=VARCHAR}, #{infoNote,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.crud.bean.StuInfo">
+    insert into tab_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="infoId != null">
+        info_Id,
+      </if>
+      <if test="infoName != null">
+        info_Name,
+      </if>
+      <if test="infoSex != null">
+        info_Sex,
+      </if>
+      <if test="infoTel != null">
+        info_Tel,
+      </if>
+      <if test="infoEmail != null">
+        info_Email,
+      </if>
+      <if test="infoQq != null">
+        info_Qq,
+      </if>
+      <if test="infoWechat != null">
+        info_Wechat,
+      </if>
+      <if test="infoNote != null">
+        info_Note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="infoId != null">
+        #{infoId,jdbcType=INTEGER},
+      </if>
+      <if test="infoName != null">
+        #{infoName,jdbcType=VARCHAR},
+      </if>
+      <if test="infoSex != null">
+        #{infoSex,jdbcType=VARCHAR},
+      </if>
+      <if test="infoTel != null">
+        #{infoTel,jdbcType=VARCHAR},
+      </if>
+      <if test="infoEmail != null">
+        #{infoEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="infoQq != null">
+        #{infoQq,jdbcType=VARCHAR},
+      </if>
+      <if test="infoWechat != null">
+        #{infoWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="infoNote != null">
+        #{infoNote,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.crud.bean.StuInfoExample" resultType="java.lang.Long">
+    select count(*) from tab_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tab_info
+    <set>
+      <if test="record.infoId != null">
+        info_Id = #{record.infoId,jdbcType=INTEGER},
+      </if>
+      <if test="record.infoName != null">
+        info_Name = #{record.infoName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infoSex != null">
+        info_Sex = #{record.infoSex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infoTel != null">
+        info_Tel = #{record.infoTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infoEmail != null">
+        info_Email = #{record.infoEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infoQq != null">
+        info_Qq = #{record.infoQq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infoWechat != null">
+        info_Wechat = #{record.infoWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infoNote != null">
+        info_Note = #{record.infoNote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tab_info
+    set info_Id = #{record.infoId,jdbcType=INTEGER},
+      info_Name = #{record.infoName,jdbcType=VARCHAR},
+      info_Sex = #{record.infoSex,jdbcType=VARCHAR},
+      info_Tel = #{record.infoTel,jdbcType=VARCHAR},
+      info_Email = #{record.infoEmail,jdbcType=VARCHAR},
+      info_Qq = #{record.infoQq,jdbcType=VARCHAR},
+      info_Wechat = #{record.infoWechat,jdbcType=VARCHAR},
+      info_Note = #{record.infoNote,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crud.bean.StuInfo">
+    update tab_info
+    <set>
+      <if test="infoName != null">
+        info_Name = #{infoName,jdbcType=VARCHAR},
+      </if>
+      <if test="infoSex != null">
+        info_Sex = #{infoSex,jdbcType=VARCHAR},
+      </if>
+      <if test="infoTel != null">
+        info_Tel = #{infoTel,jdbcType=VARCHAR},
+      </if>
+      <if test="infoEmail != null">
+        info_Email = #{infoEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="infoQq != null">
+        info_Qq = #{infoQq,jdbcType=VARCHAR},
+      </if>
+      <if test="infoWechat != null">
+        info_Wechat = #{infoWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="infoNote != null">
+        info_Note = #{infoNote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where info_Id = #{infoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crud.bean.StuInfo">
+    update tab_info
+    set info_Name = #{infoName,jdbcType=VARCHAR},
+      info_Sex = #{infoSex,jdbcType=VARCHAR},
+      info_Tel = #{infoTel,jdbcType=VARCHAR},
+      info_Email = #{infoEmail,jdbcType=VARCHAR},
+      info_Qq = #{infoQq,jdbcType=VARCHAR},
+      info_Wechat = #{infoWechat,jdbcType=VARCHAR},
+      info_Note = #{infoNote,jdbcType=VARCHAR}
+    where info_Id = #{infoId,jdbcType=INTEGER}
+  </update>
+</mapper>

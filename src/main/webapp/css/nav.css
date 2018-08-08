@@ -1,0 +1,23 @@
+*{
+  margin:0;
+  padding:0;
+}
+.nav-title{
+   font-family: 'Abril Fatface', cursive; 
+}
+.navbar-header .nav-title:hover,
+.navbar-header .nav-title:focus{
+  background:#EECFA1;
+  color:#000;
+}
+
+.cative{
+  font-family:'Comfortaa', cursive;
+}
+#nav{background:#EEE9BF;color:red}
+
+.navbar-collapse .navbar-nav li a:hover,
+.navbar-collapse .navbar-nav li a:focus{
+  color:#fff;
+  background:#EECFA1;
+}
